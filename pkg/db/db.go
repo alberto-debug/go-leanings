@@ -7,6 +7,11 @@ import (
 
 var DB *sql.DB
 
+func InitDB() {
+	var err error
+	DB, eerr = sql.Open("mysql", "username:password@tcp(127.0.0.1:3306)/todos")
+}
+
 func createTable() {
 	query := `
     CREATE TABLE IF NOT EXISTS todos (
