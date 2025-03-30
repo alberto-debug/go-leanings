@@ -2,4 +2,4 @@ package main
 
 import "net/http"
 
-func handler(w http.ResponseWriter)
+func handler(w http.ResponseWriter, r *http.Request)
