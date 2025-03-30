@@ -3,13 +3,14 @@ package db
 import (
 	"database/sql"
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var DB *sql.DB
 
 func InitDB() {
 	var err error
-
 	DB, err = sql.Open("mysql", "username:password@tcp(127.0.0.1:3306)/todos")
 	if err != nil {
 		log.Fatal(err)
@@ -18,9 +19,11 @@ func InitDB() {
 	if err := DB.Ping(); err != nil {
 		log.Fatal(err)
 	}
+
+	createTable()
 }
 
-func Createtable() {
+func createTable() {
 	query := `
     CREATE TABLE IF NOT EXISTS todos (
         id INT AUTO_INCREMENT PRIMARY KEY,
