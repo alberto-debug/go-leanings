@@ -10,6 +10,9 @@ var DB *sql.DB
 func InitDB() {
 	var err error
 	DB, eerr = sql.Open("mysql", "username:password@tcp(127.0.0.1:3306)/todos")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func createTable() {
