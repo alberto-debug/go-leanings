@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
+
+	"github.com/alberto-debug/todo-backend/internal/handlers"
+	"github.com/alberto-debug/todo-backend/pkg/db"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello World")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Print("Server running at http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	db.InitDB()
+	http.HandleFunc("/api/todos", handlers.TodoHandler)
+	log.Println("Server started at :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

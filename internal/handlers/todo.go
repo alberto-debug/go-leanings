@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"github.com/alberto-debug/todo-backend/models"
 	"github.com/alberto-debug/todo-backend/pkg/db"
 )
 
@@ -13,4 +14,6 @@ func getTodos(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
+
+	todos := []models.Todo{}
 }
