@@ -1,6 +1,9 @@
 package db
 
-import "database/sql"
+import (
+	"database/sql"
+	"log"
+)
 
 var DB *sql.DB
 
@@ -12,5 +15,8 @@ func createTable() {
         completed BOOLEAN NOT NULL DEFAULT 0
     );`
 
-	_, err := DB
+	_, err := DB.Exec(query)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
