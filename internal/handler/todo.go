@@ -1,5 +1,16 @@
 package handler
 
-import "net/http"
+import (
+	"net/http"
 
-func getTodos(w http.ResponseWriter, r *http.Request)
+	"github.com/alberto-debug/todo-backend/pkg/db"
+)
+
+func getTodos(w http.ResponseWriter, r *http.Request) {
+	rows, err := db.DB.Query("SELECT id, title, completed FROM todos")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+}
